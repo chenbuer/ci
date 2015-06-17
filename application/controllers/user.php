@@ -5,9 +5,13 @@
 	class User extends CI_Controller
 	{
 		
-		function index()
+
+		public function index()//加载视图方法,直接写试图名字，不要写扩展名!!!
 		{
-			echo "user----index";
+			$this->load->vars('title','这是我的标题');
+			//echo "user----index";
+			// $this->load->view('user_index');//加载目录中的视图
+			$this->load->view('user/index');//加载子目录中的视图
 		}
 
 		protected function test()
