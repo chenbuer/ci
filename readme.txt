@@ -53,7 +53,7 @@ CI中的MVC
                 <?=$item['name'] ?>
                 <?php endforeach;?>
 
-超级对象
+超级对象    //加载东西用的，可以用来装载view、model、database、变量等等
         当前的控制器对象
         提供了很多属性：
         $this->load
@@ -74,7 +74,7 @@ CI中的MVC
                  入口文件.php/控制器/动作/参数1/参数2
 
 
-                echo $this->segment(3);//值1
+                echo $this->segment(3);//值1    //我怎么觉得是$this->uri->segment(3) 
                 echo $this->segment(4);//值2
 
                 //index.php/控制器/index/6
@@ -102,3 +102,26 @@ CI中的MVC
                 $res->result();//返回数组，数组中是一个一个的对象
                 $res->result_array();//返回二维数组，里面是关联数组
                 $res->row() //.返回第一条数据，直接是一个对象
+
+
+AR
+                $res=$this->db->get();//返回结果集对象
+                $res->result();
+
+                $this->db->insert("tableName",$dataArray/*关联数组*/);
+                $this->db->delete("tableName",限制条件);
+                $this->db->update("tableName",$dataArray/*关联数组*/,限制条件)
+                
+                //连贯操作
+                //select id,name from tableName where id>=3 order by id desc limit 2,3
+                $res=$this-db->select('id','name')
+                            ->from('user')
+                            ->where('id >=3')
+                            ->limit(3,2)    //注意：这样才是跳过两条取三条
+                            ->order_by('id desc')
+                            ->get();
+                var_dump($res->result());
+
+
+                //显示最近一条SQL
+                echo $this->db->last_query();
